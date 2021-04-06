@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Memory Game</title>
+    <link rel="stylesheet" href="theme.css" />
+  </head>
+  <body>
+    <div class="container" id="app" v-cloak>
+      <header>
+        <nav>
+          <ul>
+            <li>
+              <div>Turns: <span> {{turns}}</span></div>
+            </li>
+            <li>
+              <div>Total time: <span> {{min}}:{{sec}}</span></div>
+            </li>
+            <li>
+              <button @click="reset" :disabled="!start">
+                Restart
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <div class="memory-game">
+        <div
+          class="memory-card"
+          v-for="card in memoryCards"
+          :class="{ 'flipped': card.isFlipped, 'matched' : card.isMatched }"
+          @click="flipCard(card)"
+        >
+          <img
+            class="front-face"
+            :class="{'matched' : card.isMatched }"
+            :src="card.img"
+            :alt="card.name"
+          />
+          <img class="back-face" :src="backFace" alt="Memory Card" />
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
